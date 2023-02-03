@@ -5,8 +5,6 @@ RUN echo -e "#/media/cdrom/apks \nhttp://ftp.halifax.rwth-aachen.de/alpine/v3.16
 RUN apk update && \
     apk add docker-cli-compose
 
-ENV NODE_VERSION 18.12.1
-
 RUN docker compose version
 RUN echo 'docker compose "$@" ' >> /bin/docker-compose
 RUN chmod +x /bin/docker-compose
@@ -112,12 +110,12 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 
 # build dependencies
-COPY ./package*.json ./
-USER node
-RUN yarn
+# COPY ./package*.json ./
+# USER node
+# RUN yarn
 
 # copy in source code
-COPY --chown=node:node ./ ./
+# COPY --chown=node:node ./ ./
 
 # start testing
 # CMD [ "npm", "test" ]
